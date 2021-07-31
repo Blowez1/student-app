@@ -6,6 +6,6 @@ export const getLessons = (state) => {
     return state.lessons
 }
 
-export const getStudent = (state) => {
-    return state.student
+export const studentByNumber = (state) => {
+    return state.studentByNumber
 }

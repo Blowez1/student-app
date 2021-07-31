@@ -6,6 +6,6 @@ export const updateLessonList = (state,lessons) => {
     state.lessons = lessons
 }
 
-export const updateStudent = (state,student) => {
-    state.student = student
+export const updateStudent = (state,studentByNumber) => {
+    state.studentByNumber = studentByNumber
 }

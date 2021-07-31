@@ -12,15 +12,20 @@
                 placeholder="716"
                 class="form-control"
               />
-              <button @click="getStudent({searchInput})" class="btn btn-success searchBtn">Ara</button>
+              <button
+                @click="getStudent({ searchInput })"
+                class="btn btn-success searchBtn"
+              >
+                Ara
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="mt-5">
-      <table v-if="!studentByNumber == null" class="table table-border">
+    <div class="mt-5" v-if="student.name">
+      <table class="table table-border">
         <thead>
           <tr>
             <th>Okul Numarası</th>
@@ -31,7 +36,22 @@
         </thead>
         <tbody>
           <tr>
-              <td>{{studentByNumber}}</td>
+            <td>{{ student.schoolNumber }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.surname }}</td>
+            <td class="lessons">
+
+                <div class="d-flex align-items-center" v-if="student.registeredLessons.length == 0">
+                    <span>Henüz kayıtlı ders bulunmamaktadır.</span> <button class="btn btn-primary mx-2">Ders Ekle</button>
+                </div>
+                
+              <span
+                v-for="lesson in student.registeredLessons"
+                :key="lesson.lessonId"
+                class="lesson badge bg-primary"
+                >{{ lesson.lessonTitle }}</span
+              >
+            </td>
           </tr>
         </tbody>
       </table>
@@ -45,19 +65,30 @@ export default {
   data() {
     return {
       searchInput: null,
-      studentByNumber : null
     };
   },
   methods: {
     ...mapActions(["getStudent"]),
+  },
+  computed: {
     ...mapGetters({
-      student: "getStudent"
-    })
+      student: "studentByNumber",
+    }),
   },
 };
 </script>
 <style lang="scss">
 .searchBtn {
   margin-left: 15px;
+}
+
+.lessons {
+  .lesson {
+    margin-right: 8px;
+    
+    &:nth-last-child(1) {
+      margin-right: 0px;
+    }
+  }
 }
 </style>

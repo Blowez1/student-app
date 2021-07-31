@@ -46,17 +46,20 @@ export const getStudent = ({
   dispatch
 }, payload) => {
 
-  if (payload.searchInput == "") {
+  if (payload.searchInput == null) {
+
     alert("Boş bırakamazsın!");
+
   } else {
+
     let schoolNumber = payload.searchInput;
 
     axios.get('http://localhost:3000/students?schoolNumber=' + schoolNumber).then(response => {
-      let student = response.data;
+      
+    let student = response.data[0];
 
-      commit('updateStudent', student)
-    }).catch(error => {
-      console.log(error.data)
+    commit('updateStudent', student)
+
     })
   }
 

@@ -19,7 +19,15 @@ export const store = new Vuex.Store({
       "registeredDate": null
     }],
     lessons: {},
-    student : {}
+    studentByNumber: {
+      "id": null,
+      "name": null,
+      "surname": null,
+      "age": null,
+      "schoolNumber": null,
+      "registeredDate": null,
+      "registeredLessons": []
+    }
   },
 
   getters,
