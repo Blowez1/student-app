@@ -1,0 +1,55 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Berke",
+      "surname": "Batur",
+      "age": 18,
+      "schoolNumber": 715,
+      "registeredDate": "2021-07-31 12:51:53",
+      "registeredLessons": [
+        {
+          "lessonId": 1,
+          "lessonCode": "TUR",
+          "lessonTitle": "Türkçe"
+        },
+        {
+          "lessonId": 2,
+          "lessonCode": "MAT",
+          "lessonTitle": "Matematik"
+        }
+      ]
+    },
+    {
+      "name": "Batu",
+      "surname": "karakaya",
+      "age": "11",
+      "schoolNumber": "331",
+      "registeredLessons": [],
+      "registeredDate": "2021-07-31",
+      "id": 2
+    }
+  ],
+  "lessons": [
+    {
+      "id": 1,
+      "lessonCode": "TUR",
+      "lessonTitle": "Türkçe"
+    },
+    {
+      "id": 2,
+      "lessonCode": "MAT",
+      "lessonTitle": "Matematik"
+    },
+    {
+      "id": 3,
+      "lessonCode": "GEO",
+      "lessonTitle": "Geometri"
+    },
+    {
+      "id": 4,
+      "lessonCode": "TAR",
+      "lessonTitle": "Tarih"
+    }
+  ]
+}

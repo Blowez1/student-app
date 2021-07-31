@@ -10,6 +10,9 @@
             <router-link class="nav-link" to="/" tag="a">Ana Sayfa</router-link>
         </li>
         <li class="nav-item">
+            <router-link class="nav-link" to="/addStudent" tag="a">Öğrenci Ekle</router-link>
+        </li>
+        <li class="nav-item">
             <router-link class="nav-link" to="/addLessonStudent" tag="a">Ders Ekle</router-link>
         </li>
         <li class="nav-item">

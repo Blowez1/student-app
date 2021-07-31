@@ -16,6 +16,9 @@ export default {
   name: 'app',
   components : {
     Header
+  },
+  mounted () {
+    this.$store.dispatch("initApp")
   }
 }
 </script>
