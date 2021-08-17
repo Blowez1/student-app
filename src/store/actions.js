@@ -58,7 +58,14 @@ export const getStudent = ({
       
     let student = response.data[0];
 
-    commit('updateStudent', student)
+    if (student === undefined) {
+      alert(schoolNumber + " Numaralı bir öğrenci bulunmamaktadır.")
+    }
+    else {
+      commit('updateStudent', student);
+    }
+
+    
 
     })
   }
@@ -66,3 +73,4 @@ export const getStudent = ({
 
 
 }
+

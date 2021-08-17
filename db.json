@@ -17,6 +17,16 @@
           "lessonId": 2,
           "lessonCode": "MAT",
           "lessonTitle": "Matematik"
+        },
+        {
+          "lessonId": 3,
+          "lessonCode": "GEO",
+          "lessonTitle": "Geometri"
+        },
+        {
+          "lessonId": 4,
+          "lessonCode": "TAR",
+          "lessonTitle": "Tarih"
         }
       ]
     },
@@ -28,6 +38,51 @@
       "registeredLessons": [],
       "registeredDate": "2021-07-31",
       "id": 2
+    },
+    {
+      "name": "Büşra",
+      "surname": "Batur",
+      "age": "24",
+      "schoolNumber": "600",
+      "registeredLessons": [],
+      "registeredDate": "2021-08-01",
+      "id": 3
+    },
+    {
+      "name": "Ahmet",
+      "surname": "Kaya",
+      "age": "31",
+      "schoolNumber": "31",
+      "registeredLessons": [],
+      "registeredDate": "2021-08-01",
+      "id": 4
+    },
+    {
+      "name": "Ali",
+      "surname": "Durmaz",
+      "age": "45",
+      "schoolNumber": "500",
+      "registeredLessons": [],
+      "registeredDate": "2021-08-01",
+      "id": 5
+    },
+    {
+      "name": "Yunus",
+      "surname": "Batur",
+      "age": "52",
+      "schoolNumber": "51",
+      "registeredLessons": [],
+      "registeredDate": "2021-08-15",
+      "id": 6
+    },
+    {
+      "name": "Özgür",
+      "surname": "Polat",
+      "age": "19",
+      "schoolNumber": "712",
+      "registeredLessons": [],
+      "registeredDate": "2021-08-15",
+      "id": 7
     }
   ],
   "lessons": [
