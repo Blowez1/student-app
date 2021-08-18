@@ -113,7 +113,10 @@ export const addLesson = ({
             "age": studentOldData.age,
             "schoolNumber": studentOldData.schoolNumber,
             "registeredDate": studentOldData.registeredDate,
-            "registeredLessons": studentOldData.registeredLessons.push(lesson)
+            // İkisini de kullanabilirsin abicim üstteki daha kullanışlı ;)
+            "registeredLessons": [...studentOldData.registeredLessons, lesson]
+            // "registeredLessons": studentOldData.registeredLessons.concat(lesson)
+            
           }
         })
         .finally(() => {

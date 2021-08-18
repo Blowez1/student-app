@@ -80,7 +80,13 @@
       "surname": "Polat",
       "age": "19",
       "schoolNumber": "712",
-      "registeredLessons": 2,
+      "registeredLessons": [
+        {
+          "lessonId": 1,
+          "lessonCode": "TUR",
+          "lessonTitle": "Türkçe"
+        }
+      ],
       "registeredDate": "2021-08-15",
       "id": 7
     }
