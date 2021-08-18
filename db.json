@@ -80,7 +80,7 @@
       "surname": "Polat",
       "age": "19",
       "schoolNumber": "712",
-      "registeredLessons": [],
+      "registeredLessons": 2,
       "registeredDate": "2021-08-15",
       "id": 7
     }
