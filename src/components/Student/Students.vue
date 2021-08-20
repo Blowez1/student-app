@@ -9,6 +9,7 @@
             <th>Soyad</th>
             <th>Yaş</th>
             <th>Okul Numarası</th>
+            <th>Kayıtlı Ders Sayısı</th>
             <th>Tarih</th>
           </tr>
         </thead>
@@ -19,6 +20,7 @@
             <td>{{ student.surname }}</td>
             <td>{{ student.age }}</td>
             <td>{{ student.schoolNumber }}</td>
+            <td>{{ student.registeredLessons.length }}</td>
             <td>{{ student.registeredDate }}</td>
           </tr>
         </tbody>

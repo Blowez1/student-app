@@ -27,7 +27,8 @@
         <div class="col-12">
           <label class="form-label">Öğrenci Numarası</label>
           <input
-            type="text"
+            type="number"
+            min="0"
             v-model="student.schoolNumber"
             class="form-control"
           />

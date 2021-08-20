@@ -1,11 +1,11 @@
-export const updateStudentList = (state,students) => {
+export const SET_STUDENTLIST = (state,students) => {
     state.students = students
 }
 
-export const updateLessonList = (state,lessons) => {
+export const SET_LESSONLIST = (state,lessons) => {
     state.lessons = lessons
 }
 
-export const updateStudent = (state,studentByNumber) => {
+export const SET_STUDENT = (state,studentByNumber) => {
     state.studentByNumber = studentByNumber
 }

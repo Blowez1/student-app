@@ -1,4 +1,6 @@
 import axios from "axios"
+import Swal from 'sweetalert2'
+
 
 export const initApp = ({
   commit
@@ -6,12 +8,12 @@ export const initApp = ({
   axios.get('http://localhost:3000/students').then(response => {
     let students = response.data;
 
-    commit('updateStudentList', students);
+    commit('SET_STUDENTLIST', students);
   });
   axios.get('http://localhost:3000/lessons').then(response => {
     let lessons = response.data;
 
-    commit('updateLessonList', lessons);
+    commit('SET_LESSONLIST', lessons);
   })
 }
 
@@ -20,8 +22,27 @@ export const addStudent = ({
 }, payload) => {
 
   if (payload.student.name == "" || payload.student.surname == "" || payload.student.age == "" || payload.student.schoolNumber == "") {
-    alert("Boş alan bırakmayın!")
+
+    Swal.fire({
+      title: 'Hata!',
+      text: 'Boş alan bırakamazsın!',
+      icon: 'warning',
+      confirmButtonText: 'Tamam'
+    })
+
   } else {
+
+    const isStudent = (number) => {
+      
+
+      axios.get('http://localhost:3000/students?schoolNumber=' + number)
+      .then(response => {
+          let studentData = response.data[0];
+
+          
+      })
+
+    }
 
     let student = {
       "name": payload.student.name,
@@ -29,14 +50,31 @@ export const addStudent = ({
       "age": payload.student.age,
       "schoolNumber": payload.student.schoolNumber,
       "registeredLessons": [],
-      "registeredDate": new Date().toISOString().slice(0, 10),
+      "registeredDate": new Date().toISOString().slice(0, 10)
     }
 
-    axios.post('http://localhost:3000/students',
-      student
-    ).finally(() => {
-      dispatch("initApp")
-    })
+    console.log(isStudent(payload.student.schoolNumber))
+
+    // if (isStudent(payload.student.schoolNumber) == false) {
+    //   axios.post('http://localhost:3000/students',
+    //     student
+    //   ).finally(() => {
+    //     dispatch("initApp")
+    //   })
+    // }
+
+    // else {
+
+    //   Swal.fire({
+    //     title: 'Hata!',
+    //     text: 'Bu okul numarasını kullanamazsın!',
+    //     icon: 'error',
+    //     confirmButtonText: 'Tamam'
+    //   })
+
+    // }
+
+
   }
 
 }
@@ -48,7 +86,12 @@ export const getStudent = ({
 
   if (payload.schoolNumber == null) {
 
-    alert("Boş bırakamazsın!");
+    Swal.fire({
+      title: 'Hata!',
+      text: 'Boş bırakamazsın!',
+      icon: 'warning',
+      confirmButtonText: 'Tamam'
+    })
 
   } else {
 
@@ -61,7 +104,7 @@ export const getStudent = ({
       if (student === undefined) {
         alert(schoolNumber + " Numaralı bir öğrenci bulunmamaktadır.")
       } else {
-        commit('updateStudent', student);
+        commit('SET_STUDENT', student);
       }
     })
   }
@@ -69,32 +112,45 @@ export const getStudent = ({
 
 }
 
-export const getLesson = ({
-  commit,
-  dispatch
-}, payload) => {
+// export const getLesson =  ({
+//   commit,
+//   dispatch
+// }, payload) => {
 
+//   const res =  axios.get('http://localhost:3000/lessons/' + payload.id)
+//     .then(response => {
+//         return response.data;
+//       }
+//     )
 
+//   return res;
 
-  axios.get('http://localhost:3000/lessons/' + payload)
-    .then(response => {
-      return response.data
-    })
-}
-
+// }
 
 export const addLesson = ({
   commit,
   dispatch
 }, payload) => {
+
   let currentLesson
   let studentOldData
   let studentNewData
 
+  const isUnique = (studentOldData, currentLesson) => {
+
+    return studentOldData.registeredLessons.findIndex((lesson) => {
+      if (lesson.lessonId == currentLesson.id)
+        return true;
+    });
+
+  }
+
   axios.get('http://localhost:3000/lessons/' + payload.lessonId)
+
     .then(response => {
       currentLesson = response.data
     })
+
     .finally(() => {
 
       axios.get('http://localhost:3000/students/' + payload.studentId)
@@ -116,22 +172,36 @@ export const addLesson = ({
             // İkisini de kullanabilirsin abicim üstteki daha kullanışlı ;)
             "registeredLessons": [...studentOldData.registeredLessons, lesson]
             // "registeredLessons": studentOldData.registeredLessons.concat(lesson)
-            
           }
+
         })
+
         .finally(() => {
-          axios.patch('http://localhost:3000/students/' + payload.studentId, studentNewData)
-            .then(response => {
-              console.log(response)
-            })
-            .catch(error => {
-              console.log(error);
-            })
-            .finally(() => {
-              dispatch("getStudent", {
-                schoolNumber: payload.studentSchoolNumber
+
+          if (isUnique(studentOldData, currentLesson) == -1) {
+
+            axios.patch('http://localhost:3000/students/' + payload.studentId, studentNewData)
+              .catch(error => {
+                console.log(error);
               })
+              .finally(() => {
+                dispatch("getStudent", {
+                  schoolNumber: payload.studentSchoolNumber
+                })
+              })
+          } else {
+
+
+            Swal.fire({
+              title: 'Hata!',
+              text: 'Öğrenci bu derse zaten kayıtlı!',
+              icon: 'warning',
+              confirmButtonText: 'Tamam'
             })
+
+
+          }
+
         })
 
     })
