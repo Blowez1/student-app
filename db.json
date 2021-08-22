@@ -146,6 +146,45 @@
       ],
       "registeredDate": "2021-08-15",
       "id": 7
+    },
+    {
+      "name": "emirhan",
+      "surname": "ekiz",
+      "age": "31",
+      "schoolNumber": "3131",
+      "registeredLessons": [],
+      "registeredDate": "2021-08-22",
+      "id": 8
+    },
+    {
+      "name": "Merve",
+      "surname": "Ürkmez",
+      "age": "18",
+      "schoolNumber": "711",
+      "registeredLessons": [
+        {
+          "lessonId": 1,
+          "lessonCode": "TUR",
+          "lessonTitle": "Türkçe"
+        },
+        {
+          "lessonId": 2,
+          "lessonCode": "MAT",
+          "lessonTitle": "Matematik"
+        },
+        {
+          "lessonId": 3,
+          "lessonCode": "GEO",
+          "lessonTitle": "Geometri"
+        },
+        {
+          "lessonId": 4,
+          "lessonCode": "TAR",
+          "lessonTitle": "Tarih"
+        }
+      ],
+      "registeredDate": "2021-08-22",
+      "id": 9
     }
   ],
   "lessons": [

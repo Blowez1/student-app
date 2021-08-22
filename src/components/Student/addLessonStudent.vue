@@ -45,6 +45,13 @@
                 v-for="lesson in student.registeredLessons"
                 :key="lesson.lessonId"
                 class="lesson badge bg-success"
+                @click="
+                  delLesson({
+                    lessonId: lesson.lessonId,
+                    studentId: student.id,
+                    studentSchoolNumber: student.schoolNumber,
+                  })
+                "
               >
                 {{ lesson.lessonTitle }}
               </span>
@@ -100,7 +107,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getStudent", "addLesson"]),
+    ...mapActions(["getStudent", "addLesson", "delLesson"]),
     toggleLesson() {
       const addLessonBody = document.querySelector(".lesson-card-body");
       addLessonBody.classList.toggle("active");
@@ -129,6 +136,11 @@ export default {
 .lessons {
   .lesson {
     margin-right: 8px;
+    &:hover {
+      text-decoration: line-through;
+      opacity: 0.7;
+      cursor: pointer;
+    }
 
     &:nth-last-child(1) {
       margin-right: 0px;

@@ -17,7 +17,7 @@ export const initApp = ({
   })
 }
 
-export const addStudent = ({
+export const addStudent = async ({
   dispatch
 }, payload) => {
 
@@ -32,15 +32,16 @@ export const addStudent = ({
 
   } else {
 
-    const isStudent = (number) => {
-      
+    const isStudent = async (number) => {
 
-      axios.get('http://localhost:3000/students?schoolNumber=' + number)
-      .then(response => {
-          let studentData = response.data[0];
+      return await axios.get('http://localhost:3000/students?schoolNumber=' + number)
+        .then(response => {
+          if (response.data.length === 0) {
+            return true;
+          }
 
-          
-      })
+          return false;
+        })
 
     }
 
@@ -53,26 +54,31 @@ export const addStudent = ({
       "registeredDate": new Date().toISOString().slice(0, 10)
     }
 
-    console.log(isStudent(payload.student.schoolNumber))
 
-    // if (isStudent(payload.student.schoolNumber) == false) {
-    //   axios.post('http://localhost:3000/students',
-    //     student
-    //   ).finally(() => {
-    //     dispatch("initApp")
-    //   })
-    // }
+    if (await isStudent(payload.student.schoolNumber) == true) {
+      axios.post('http://localhost:3000/students',
+        student
+      ).finally(() => {
 
-    // else {
+        Swal.fire({
+          title: 'İşlem başarılı!',
+          text: 'Tebrikler, ' + student.name + ' başarıyla kayıt oldunuz.',
+          icon: 'success',
+          confirmButtonText: 'Tamam'
+        })
 
-    //   Swal.fire({
-    //     title: 'Hata!',
-    //     text: 'Bu okul numarasını kullanamazsın!',
-    //     icon: 'error',
-    //     confirmButtonText: 'Tamam'
-    //   })
+        dispatch("initApp")
+      })
+    } else {
 
-    // }
+      Swal.fire({
+        title: 'Hata!',
+        text: 'Bu okul numarasını kullanamazsın!',
+        icon: 'error',
+        confirmButtonText: 'Tamam'
+      })
+
+    }
 
 
   }
@@ -205,6 +211,51 @@ export const addLesson = ({
         })
 
     })
+}
+
+export const delLesson = async ({
+  dispatch
+}, payload) => {
+
+  let studentOldData
+  let studentNewData
+
+  const newLessonData = async (lessondata, lessonId) => {
+
+    let newlessons
+
+    newlessons = lessondata.registeredLessons
+
+    newlessons = newlessons.filter((el) => {
+      return el.lessonId != lessonId
+    })
+
+    return await newlessons
+  }
+
+
+
+  axios.get('http://localhost:3000/students/' + payload.studentId)
+    .then(async response => {
+      studentOldData = response.data
+
+      studentNewData = {
+        "name": studentOldData.name,
+        "surname": studentOldData.surname,
+        "age": studentOldData.age,
+        "schoolNumber": studentOldData.schoolNumber,
+        "registeredDate": studentOldData.registeredDate,
+        "registeredLessons": await newLessonData(studentOldData, payload.lessonId)
+      }
+
+      axios.patch('http://localhost:3000/students/' + payload.studentId, studentNewData)
+        .then(() => {
+          dispatch('getStudent', {
+            schoolNumber: payload.studentSchoolNumber
+          })
+        })
+    })
+
 
 
 }
