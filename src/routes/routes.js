@@ -4,7 +4,6 @@ import addLessonStudent from '../components/Student/addLessonStudent';
 import Students from '../components/Student/Students';
 
 
-
 export const routes = [{
     path: '/',
     component: Home,
